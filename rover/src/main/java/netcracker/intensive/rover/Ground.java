@@ -38,4 +38,16 @@ public class Ground {
             }
         }
     }
+
+    public GroundCell[][] getLandscape() {
+        return landscape;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
 }
