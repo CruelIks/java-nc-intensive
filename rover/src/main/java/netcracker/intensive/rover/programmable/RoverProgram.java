@@ -2,13 +2,21 @@ package netcracker.intensive.rover.programmable;
 
 import netcracker.intensive.rover.command.RoverCommand;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 public class RoverProgram {
     public static final String LOG = "log";
     public static final String STATS = "stats";
     public static final String SEPARATOR = "===";
+
+    private final Map<String, Object> settings = new HashMap<>();
+    private final Collection<RoverCommand> commands = new ArrayList<>();
+
+    public Map<String, Object> getSettings() {
+        return settings;
+    }
+
+    public Collection<RoverCommand> getCommands() {
+        return commands;
+    }
 }

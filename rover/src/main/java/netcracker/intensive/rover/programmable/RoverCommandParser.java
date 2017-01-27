@@ -6,12 +6,14 @@ import java.io.IOException;
 
 public class RoverCommandParser {
     private String path;
+    private ProgrammableRover rover;
 
-    public RoverCommandParser(String path) {
+    public RoverCommandParser(ProgrammableRover rover, String path) {
+        this.rover = rover;
         this.path = path;
     }
 
-    public void loadProgramFromFile() {
+    public RoverProgram getProgram() {
 
         try (FileReader fileReader = new FileReader(path);
              BufferedReader buffer = new BufferedReader(fileReader)) {
@@ -26,7 +28,7 @@ public class RoverCommandParser {
         } catch (IOException e) {
             throw new RoverCommandParserException(e);
         }
-
+        return null;
     }
 
 }

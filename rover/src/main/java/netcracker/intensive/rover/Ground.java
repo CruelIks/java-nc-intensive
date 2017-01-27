@@ -19,24 +19,36 @@ public class Ground {
 
     public void initialize(GroundCell... cells) {
 
-        if (cells.length == 0) {
-            return;
-        }
-        if (cells.length > height * width) {
-            throw new RuntimeException("Too much cells");
+        if (cells.length < height * width) {
+            throw new IllegalArgumentException();
         }
 
         int x = 0, y = 0;
 
         for (GroundCell cell : cells) {
+
+            if (y == height | x == width){
+                break;
+            }
             landscape[y][x] = cell;
 
-            x++;
-            if (x == width) {
-                x = 0;
-                y++;
+            y++;
+            if (y == height) {
+                y = 0;
+                x++;
             }
+
+
         }
+    }
+
+    public GroundCell getCell(int y, int x) throws OutOfGroundException {
+
+        if (y >= height | x >= width | y < 0 | x < 0){
+            throw new OutOfGroundException();
+        }
+
+        return landscape[y][x];
     }
 
     public GroundCell[][] getLandscape() {

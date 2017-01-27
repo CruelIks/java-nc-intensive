@@ -16,6 +16,10 @@ public class GroundCell {
         this.state = CellState.FREE;
     }
 
+    public GroundCell(CellState state) {
+        this.state = state;
+    }
+
     public GroundCell(Point point, CellState state) {
         this.point = point;
         this.state = state;

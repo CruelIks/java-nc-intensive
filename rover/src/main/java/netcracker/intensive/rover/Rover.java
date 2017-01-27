@@ -10,20 +10,24 @@ public class Rover implements Moveable, Turnable, Liftable, Landable {
 
     protected Point position;
     protected Direction direction;
-    protected boolean flight;
+    protected boolean airborne;
     protected GroundVisor groundVisor;
 
     public Rover() {
         this.position = new Point(0, 0);
         this.direction = Direction.SOUTH;
-        this.flight = false;
+        this.airborne = false;
     }
 
     public Rover(GroundVisor groundVisor) {
         this.position = new Point(0, 0);
         this.direction = Direction.SOUTH;
-        this.flight = false;
+        this.airborne = false;
         this.groundVisor = groundVisor;
+    }
+
+    public Point getCurrentPosition(){
+        return position;
     }
 
     @Override
@@ -57,7 +61,7 @@ public class Rover implements Moveable, Turnable, Liftable, Landable {
         if (!(null == groundVisor)) {
             try {
                 if (groundVisor.scanPoint(newPoint) == CellState.FREE) {
-                    if(isFlight()){
+                    if(isAirborne()){
                         land(newPoint, direction);
                     }
                     else{
@@ -65,7 +69,7 @@ public class Rover implements Moveable, Turnable, Liftable, Landable {
                     }
                  }
             } catch (OutOfGroundException e) {
-                if (!flight) {
+                if (!airborne) {
                     lift();
                 }
             }
@@ -76,13 +80,13 @@ public class Rover implements Moveable, Turnable, Liftable, Landable {
     @Override
     public void land(Point position, Direction direction) {
         this.position = position;
-        flight = false;
+        airborne = false;
         this.direction = direction;
     }
 
     @Override
     public void lift() {
-        flight = true;
+        airborne = true;
     }
 
     @Override
@@ -98,12 +102,12 @@ public class Rover implements Moveable, Turnable, Liftable, Landable {
         this.position = position;
     }
 
-    public boolean isFlight() {
-        return flight;
+    public boolean isAirborne() {
+        return airborne;
     }
 
-    public void setFlight(boolean flight) {
-        this.flight = flight;
+    public void setAirborne(boolean airborne) {
+        this.airborne = airborne;
     }
 
     public GroundVisor getGroundVisor() {
@@ -112,5 +116,9 @@ public class Rover implements Moveable, Turnable, Liftable, Landable {
 
     public void setGroundVisor(GroundVisor groundVisor) {
         this.groundVisor = groundVisor;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 }

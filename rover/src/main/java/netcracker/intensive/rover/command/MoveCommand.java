@@ -1,12 +1,12 @@
 package netcracker.intensive.rover.command;
 
-import netcracker.intensive.rover.programmable.ProgrammableRover;
+import netcracker.intensive.rover.Rover;
 
 public class MoveCommand implements RoverCommand {
 
-    private ProgrammableRover rover;
+    private Rover rover;
 
-    public MoveCommand(ProgrammableRover rover) {
+    public MoveCommand(Rover rover) {
         this.rover = rover;
     }
 
