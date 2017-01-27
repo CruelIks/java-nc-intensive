@@ -7,4 +7,8 @@ public class LoggingCommand implements RoverCommand {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoggingCommand.class);
 
+    @Override
+    public void execute() {
+
+    }
 }

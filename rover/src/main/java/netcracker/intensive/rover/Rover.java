@@ -8,10 +8,10 @@ import netcracker.intensive.rover.constants.Direction;
  */
 public class Rover implements Moveable, Turnable, Liftable, Landable {
 
-    private Point position;
-    private Direction direction;
-    private boolean flight;
-    private GroundVisor groundVisor;
+    protected Point position;
+    protected Direction direction;
+    protected boolean flight;
+    protected GroundVisor groundVisor;
 
     public Rover() {
         this.position = new Point(0, 0);
