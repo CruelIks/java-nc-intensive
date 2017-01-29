@@ -14,4 +14,25 @@ public class MoveCommand implements RoverCommand {
     public void execute() {
         rover.move();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MoveCommand that = (MoveCommand) o;
+
+        return rover != null ? rover.equals(that.rover) : that.rover == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return rover != null ? rover.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Rover moved";
+    }
 }

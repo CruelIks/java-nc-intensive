@@ -20,4 +20,32 @@ public class LandCommand implements RoverCommand {
     public void execute() {
         rover.land(position, direction);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LandCommand that = (LandCommand) o;
+
+        if (rover != null ? !rover.equals(that.rover) : that.rover != null) return false;
+        if (position != null ? !position.equals(that.position) : that.position != null) return false;
+        return direction == that.direction;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = rover != null ? rover.hashCode() : 0;
+        result = 31 * result + (position != null ? position.hashCode() : 0);
+        result = 31 * result + (direction != null ? direction.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Land at" +
+                position +
+                "heading " + direction;
+    }
 }

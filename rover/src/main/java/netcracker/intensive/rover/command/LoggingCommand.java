@@ -15,6 +15,12 @@ public class LoggingCommand implements RoverCommand {
 
     @Override
     public void execute() {
+        LOGGER.debug(roverCommand.toString());
+        roverCommand.execute();
+    }
 
+    @Override
+    public String toString() {
+        return roverCommand.toString();
     }
 }

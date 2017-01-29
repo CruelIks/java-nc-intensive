@@ -8,11 +8,9 @@ import netcracker.intensive.rover.constants.CellState;
  * */
 public class GroundCell {
 
-    private Point point;
     private CellState state;
 
     public GroundCell(Point point) {
-        this.point = point;
         this.state = CellState.FREE;
     }
 
@@ -21,16 +19,7 @@ public class GroundCell {
     }
 
     public GroundCell(Point point, CellState state) {
-        this.point = point;
         this.state = state;
-    }
-
-    public Point getPoint() {
-        return point;
-    }
-
-    public void setPoint(Point point) {
-        this.point = point;
     }
 
     public CellState getState() {

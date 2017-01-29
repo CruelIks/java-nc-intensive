@@ -1,6 +1,5 @@
 package netcracker.intensive.rover;
 
-import netcracker.intensive.rover.constants.CellState;
 import netcracker.intensive.rover.constants.Direction;
 
 /**
@@ -26,15 +25,22 @@ public class Rover implements Moveable, Turnable, Liftable, Landable {
         this.groundVisor = groundVisor;
     }
 
-    public Point getCurrentPosition(){
+    public Point getCurrentPosition() {
+        if (isAirborne()) {
+            return null;
+        }
         return position;
     }
 
     @Override
     public void move() {
 
+        if (getDirection() == null) {
+            return;
+        }
+
         int deltaX = 0, deltaY = 0;
-        switch (direction) {
+        switch (getDirection()) {
             case SOUTH: {
                 deltaY = 1;
                 break;
@@ -55,19 +61,22 @@ public class Rover implements Moveable, Turnable, Liftable, Landable {
 
             }
         }
+
+        if (deltaX + deltaY == 0) {
+            return;
+        }
         Point newPoint = new Point(position.getX() + deltaX, position.getY() + deltaY);
 
         //проверить точку визором, без визора не едем
         if (!(null == groundVisor)) {
             try {
-                if (groundVisor.scanPoint(newPoint) == CellState.FREE) {
-                    if(isAirborne()){
+                if (!groundVisor.hasObstacles(newPoint)) {
+                    if (isAirborne()) {
                         land(newPoint, direction);
-                    }
-                    else{
+                    } else {
                         position = newPoint;
                     }
-                 }
+                }
             } catch (OutOfGroundException e) {
                 if (!airborne) {
                     lift();
@@ -79,10 +88,16 @@ public class Rover implements Moveable, Turnable, Liftable, Landable {
 
     @Override
     public void land(Point position, Direction direction) {
-        this.position = position;
-        airborne = false;
-        this.direction = direction;
-    }
+
+        try {
+            if (!groundVisor.hasObstacles(position)) {
+                this.position = position;
+                airborne = false;
+                this.direction = direction;
+            }
+        } catch (OutOfGroundException e) {
+        }
+   }
 
     @Override
     public void lift() {
@@ -119,6 +134,11 @@ public class Rover implements Moveable, Turnable, Liftable, Landable {
     }
 
     public Direction getDirection() {
-        return direction;
+        if (isAirborne()) {
+            return null;
+        } else {
+            return direction;
+        }
+
     }
 }

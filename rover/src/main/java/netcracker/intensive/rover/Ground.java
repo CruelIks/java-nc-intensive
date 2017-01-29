@@ -32,17 +32,17 @@ public class Ground {
             }
             landscape[y][x] = cell;
 
-            y++;
-            if (y == height) {
-                y = 0;
-                x++;
+            x++;
+            if (x == width) {
+                x = 0;
+                y++;
             }
 
 
         }
     }
 
-    public GroundCell getCell(int y, int x) throws OutOfGroundException {
+    public GroundCell getCell(int x, int y) throws OutOfGroundException {
 
         if (y >= height | x >= width | y < 0 | x < 0){
             throw new OutOfGroundException();

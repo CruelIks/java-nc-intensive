@@ -10,14 +10,15 @@ public class GroundVisor {
         this.ground = ground;
     }
 
-    public boolean hasObstacles(Point point) throws OutOfGroundException{
-        if (point.getY() >= ground.getHeight() | point.getX() >= ground.getWidth()){
+    public boolean hasObstacles(Point point) throws OutOfGroundException {
+        if (point.getY() >= ground.getHeight() | point.getX() >= ground.getWidth()
+                | point.getY() < 0 | point.getX() < 0) {
             throw new OutOfGroundException();
         }
 
         GroundCell cell = ground.getLandscape()[point.getY()][point.getX()];
 
-        if (null == cell){
+        if (null == cell) {
             throw new OutOfGroundException();
         }
 
@@ -25,15 +26,15 @@ public class GroundVisor {
 
     }
 
-    public CellState scanPoint(Point point) throws OutOfGroundException{
+    public CellState scanPoint(Point point) throws OutOfGroundException {
 
-        if (point.getY() >= ground.getHeight() | point.getX() >= ground.getWidth()){
+        if (point.getY() >= ground.getHeight() | point.getX() >= ground.getWidth()) {
             throw new OutOfGroundException("Конец земли! Взлетай!");
         }
 
         GroundCell cell = ground.getLandscape()[point.getY()][point.getX()];
 
-        if (null == cell){
+        if (null == cell) {
             throw new OutOfGroundException("Нет ячейки!");
         }
 

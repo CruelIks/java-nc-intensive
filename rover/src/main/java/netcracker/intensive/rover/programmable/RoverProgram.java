@@ -19,4 +19,12 @@ public class RoverProgram {
     public Collection<RoverCommand> getCommands() {
         return commands;
     }
+
+    public void addSetting(String key, Object value){
+        settings.put(key, value);
+    }
+
+    public void addCommand(RoverCommand command){
+        commands.add(command);
+    }
 }

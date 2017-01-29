@@ -14,4 +14,25 @@ public class LiftCommand implements RoverCommand {
     public void execute() {
         rover.lift();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LiftCommand that = (LiftCommand) o;
+
+        return rover != null ? rover.equals(that.rover) : that.rover == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return rover != null ? rover.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Rover lifted";
+    }
 }

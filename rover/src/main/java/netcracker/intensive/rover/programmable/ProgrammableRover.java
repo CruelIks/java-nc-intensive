@@ -2,8 +2,10 @@ package netcracker.intensive.rover.programmable;
 
 import netcracker.intensive.rover.GroundVisor;
 import netcracker.intensive.rover.Rover;
+import netcracker.intensive.rover.command.RoverCommand;
 import netcracker.intensive.rover.stats.SimpleRoverStatsModule;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,10 +26,16 @@ public class ProgrammableRover extends Rover implements ProgramFileAware {
 
     @Override
     public void executeProgramFile(String path) {
+        RoverProgram program = new RoverCommandParser(this, path).getProgram();
+        settings.putAll(program.getSettings());
+
+        for (RoverCommand roverCommand : program.getCommands()){
+            roverCommand.execute();
+        }
 
     }
 
     public Map<String, Object> getSettings() {
-        return settings;
+        return Collections.unmodifiableMap(settings);
     }
 }
