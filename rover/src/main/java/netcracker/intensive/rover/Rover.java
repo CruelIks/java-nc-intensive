@@ -109,10 +109,6 @@ public class Rover implements Moveable, Turnable, Liftable, Landable {
         this.direction = direction;
     }
 
-    public Point getPosition() {
-        return position;
-    }
-
     public void setPosition(Point position) {
         this.position = position;
     }

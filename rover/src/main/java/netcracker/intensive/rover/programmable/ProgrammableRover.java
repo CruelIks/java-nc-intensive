@@ -35,6 +35,17 @@ public class ProgrammableRover extends Rover implements ProgramFileAware {
 
     }
 
+    @Override
+    public void move() {
+        super.move();
+
+        if (settings.containsKey(RoverProgram.STATS)){
+            if ((boolean)settings.get(RoverProgram.STATS)){
+                statsModule.registerPosition(getCurrentPosition());
+            }
+        }
+    }
+
     public Map<String, Object> getSettings() {
         return Collections.unmodifiableMap(settings);
     }
